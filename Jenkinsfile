@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             label 'docker'
+            image 'python:3'
     }   }
     stages {
         stage('Compile') {
@@ -14,13 +15,5 @@ pipeline {
         }   }
         stage('Unit test') {
             steps {
-                sh '''python3 -m pytest \
-                    -v --junitxml=junit.xml \
-                    --cov-report xml --cov adder adder.py
-                '''
-        }   }   
-    post {
-        always {
-            junit 'junit.xml'
-            cobertura coberturaReportFile: 'coverage.xml'
-}   }   }
+                sh 'python3 -m unittest adder.py'
+}   }   }   }
