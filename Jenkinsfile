@@ -3,6 +3,9 @@ pipeline {
         dockerfile {
             label 'docker'
     }   }
+    parameters {
+        string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
+    }
     stages {
         stage('Compile') {
             steps {
@@ -11,6 +14,10 @@ pipeline {
         stage('Run') {
             steps {
                 sh 'python3 adder.py 3 5'
+        }   }
+        stage('Hello GitHub') {
+            steps {
+                echo "Hello GitHub!"
         }   }
         stage('Unit test') {
             steps {
