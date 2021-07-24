@@ -12,6 +12,10 @@ pipeline {
             steps {
                 sh 'python3 adder.py 3 5'
         }   }
+        stage('Hello GitHub') {
+            steps {
+                echo "Hello GitHub!"
+        }   }
         stage('Unit test') {
             steps {
                 sh '''python3 -m pytest \
